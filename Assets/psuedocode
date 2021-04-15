@@ -1,0 +1,39 @@
+// //PSUEDO CODE:
+
+// 1. Setup Variables
+
+// - Jquery select DOM elements
+
+
+// 1. Render the calender blocks (timeblocks)
+
+// - Read from localStorage
+// - Create input field
+// - Create Save Button
+// - Add CSS classes for style
+// - determine if timeblock is past/present/future
+// - Add "value" from localStorage into input
+// - Append to DOM
+// - Add to local variable
+
+// 1. Event Handler for "SAVE"
+
+// - When a user enters text into a field
+// - then user clicks "matching" "SAVE" button
+//   - save the related input field into local storage
+// - display notification/toast when the save is complete
+
+// var schedule = {
+// hour 9: 'class begins'
+// hour 10: ''
+// hour 11: ''
+// hour 12: 'lunch'
+// hour 13: ''
+// hour 14: ''
+// hour 15: 'weed and feed'
+// hour 16: ''
+// hour 17: 'dinner?'
+
+// }
+
+// localStorage.setItem('schedule', JSON.stringify(schedule));
