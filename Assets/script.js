@@ -6,25 +6,28 @@ console.log(currentHour);
 
 var container = $(".container");
 var messageDiv = $(".message");
+var storedCalendar = [];
 
-var hours = [
-  "09:00 a.m.",
-  "10:00 a.m.",
-  "11:00 a.m.",
-  "12:00 p.m.",
-  "1:00 p.m.",
-  "2:00 p.m.",
-  "3:00 p.m.",
-  "4:00 p.m.",
-  "5:00 p.m.",
-];
 $(document).ready(function () {
-  if (!localStorage.getItem("hours")) {
-    localStorage.setItem("hours", JSON.stringify(hours));
-  } else {
-    hours = JSON.parse(localStorage.getItem("hours"));
+  function generate() {
+    if (!localStorage.getItem("calendar")) {
+      localStorage.setItem("calendar", JSON.stringify(storedCalendar));
+    } else {
+      storedCalendar = JSON.parse(localStorage.getItem("calendar"));
+    }
   }
-
+  generate();
+  var hours = [
+    "09:00 a.m.",
+    "10:00 a.m.",
+    "11:00 a.m.",
+    "12:00 p.m.",
+    "01:00 p.m.",
+    "02:00 p.m.",
+    "03:00 p.m.",
+    "04:00 p.m.",
+    "05:00 p.m.",
+  ];
   for (var i = 0; i < hours.length; i++) {
     var sectionEl = $("<section>");
     var divEl = $("<div>");
@@ -57,36 +60,52 @@ $(document).ready(function () {
     divEl.append(buttonEl);
     buttonEl.append(imgEl);
   }
-
-  console.log(this);
-  function saveButtonFunction(event) {
-    event.preventDefault();
+  function generateColor() {
+    $("span").each(function (index) {
+      if ($(this).text().slice(0, 2) < currentHour) {
+        $(this).next().addClass("past");
+      } else if ($(this).text().slice(0, 2) == currentHour) {
+        $(this).next().addClass("present");
+      } else {
+        $(this).next().addClass("future");
+      }
+    });
+  }
+  generateColor();
+  function saveButtonFunction() {
     var hourLabel = $(this).siblings(".description").attr("hour-label");
     var textAreaInput = $(this).siblings(".description").val();
-    console.log(hourLabel);
-    console.log(textAreaInput);
+
     var newInput = {
-      Hour: hourLabel.value,
-      Task: textAreaInput.value,
+      Hour: hourLabel,
+      Task: textAreaInput,
     };
-    console.log(newInput);
+    if (newInput.Task === "") {
+      return;
+    }
+    var storedCalendar = JSON.parse(localStorage.getItem("calendar"));
+    if (storedCalendar === null) {
+      storedCalendar = [];
+    }
+    storedCalendar.push(newInput);
+    localStorage.setItem("calendar", JSON.stringify(storedCalendar));
+    console.log(localStorage.getItem("calendar"));
+    var message = "Schedule saved successfully!";
+    feedbackMessage(message);
   }
   var saveButton = $(".saveBtn");
   saveButton.on("click", saveButtonFunction);
-
-  // function feedbackMessage(message) {
-  //   var message = "Schedule saved successfully!";
-  //   feedbackMessage(message);
-  //   self = $(".message");
-  //   self.append(message);
-  //   setTimeout("self.fadeOut()", 1000);
-  //   if (setTimeout === 0) {
-  //     self.empty();
-  //     self.style.display = "block;";
-  //   }
-  // }
 });
 
+function feedbackMessage(message) {
+  self = $(".message");
+  self.append(message);
+  setTimeout("self.fadeOut()", 1000);
+  if (setTimeout === 0) {
+    self.empty();
+    self.style.display = "block;";
+  }
+}
 // 1. Render the calender blocks (timeblocks)
 
 // - Read from localStorage

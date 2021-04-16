@@ -56,3 +56,6 @@ The following image shows the web application's appearance and functionality:
 ![The Portfolio webpage includes a navigation bar, a header profile image, an "About Me", "My Works", and a "Contact Me" section. Each section includes text and images.](./Assets/capture3.png)
 
 ## Credits
+
+Nic Brown
+Rigo Pinell
