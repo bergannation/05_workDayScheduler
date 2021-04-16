@@ -61,10 +61,15 @@ $(document).ready(function () {
   console.log(this);
   function saveButtonFunction(event) {
     event.preventDefault();
-    let hourLabel = $(this).siblings(".description").attr("hour-label");
-    let textAreaInput = $(this).siblings(".description").val();
+    var hourLabel = $(this).siblings(".description").attr("hour-label");
+    var textAreaInput = $(this).siblings(".description").val();
     console.log(hourLabel);
     console.log(textAreaInput);
+    var newInput = {
+      Hour: hourLabel.value,
+      Task: textAreaInput.value,
+    };
+    console.log(newInput);
   }
   var saveButton = $(".saveBtn");
   saveButton.on("click", saveButtonFunction);
