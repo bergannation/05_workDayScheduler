@@ -1,42 +1,31 @@
 var today = dayjs();
 $("#currentDay").text(today.format("[Today is ] ddd - MMM D, YYYY, h:mma"));
 console.log(today);
+var currentHour = dayjs().hour();
+console.log(currentHour);
 
 var container = $(".container");
 var messageDiv = $(".message");
-$(document).ready(function () {
-  var dailySchedule = {
-    0: "",
-    1: "",
-    2: "",
-    3: "",
-    4: "",
-    5: "",
-    6: "",
-    7: "",
-    8: "",
-    9: "",
-    10: "",
-    11: "",
-    12: "",
-    13: "",
-    14: "",
-    15: "",
-    16: "",
-    17: "",
-    18: "",
-    19: "",
-    20: "",
-    21: "",
-    22: "",
-    23: "",
-    24: "",
-  };
-  console.log(dailySchedule);
-  localStorage.setItem("dailySchedule", JSON.stringify(dailySchedule));
 
-  for (var i = 0; i < 9; i++) {
-    var timeText = dailySchedule[i];
+var hours = [
+  "09:00 a.m.",
+  "10:00 a.m.",
+  "11:00 a.m.",
+  "12:00 p.m.",
+  "1:00 p.m.",
+  "2:00 p.m.",
+  "3:00 p.m.",
+  "4:00 p.m.",
+  "5:00 p.m.",
+];
+$(document).ready(function () {
+  if (!localStorage.getItem("hours")) {
+    localStorage.setItem("hours", JSON.stringify(hours));
+  } else {
+    hours = JSON.parse(localStorage.getItem("hours"));
+  }
+
+  for (var i = 0; i < hours.length; i++) {
     var sectionEl = $("<section>");
     var divEl = $("<div>");
     var spanEl = $("<span>");
@@ -47,44 +36,52 @@ $(document).ready(function () {
 
     container.attr("class", "container-fluid");
 
-    sectionEl.addClass("m-2 p-2 d-flex justify-content-center border-0");
+    sectionEl.addClass("row m-2 p-2 d-flex justify-content-center border-0");
     container.append(sectionEl);
+
     divEl.addClass("row time-block col-12 col-lg-9 m-0 p-0 shadow");
-    divEl.attr("data-label", timeText);
     spanEl.addClass("hour col-1");
-    spanEl.text(timeText);
     textareaEl.addClass("description col-10");
     buttonEl.addClass("saveBtn btnEl btn-lg col-1");
     imgEl.addClass("fa fa-save");
+
+    divEl.attr("hour-label", hours[i]);
+    spanEl.attr("hour-label", hours[i]);
+    textareaEl.attr("hour-label", hours[i]);
+    buttonEl.attr("hour-label", hours[i]);
+    spanEl.text(hours[i]);
+
     sectionEl.append(divEl);
     divEl.append(spanEl);
     divEl.append(textareaEl);
     divEl.append(buttonEl);
     buttonEl.append(imgEl);
   }
-});
 
-var saveButton = $(".btnEl");
-var textInput = $("textarea");
-
-saveButton.on("click", function (event) {
-  event.preventDefault();
-  var txt = $(textInput).val();
-  console.log(txt);
-  localStorage.setItem("Tasks", JSON.stringify(txt));
-
-  var message = "Schedule saved successfully!";
-  feedbackMessage(message);
-});
-
-function feedbackMessage(message) {
-  self = $(".message");
-  self.append(message);
-  setTimeout("self.fadeOut()", 1000);
-  if (setTimeout === 0) {
-    self.empty();
+  console.log(this);
+  function saveButtonFunction(event) {
+    event.preventDefault();
+    let hourLabel = $(this).siblings(".description").attr("hour-label");
+    let textAreaInput = $(this).siblings(".description").val();
+    console.log(hourLabel);
+    console.log(textAreaInput);
   }
-}
+  var saveButton = $(".saveBtn");
+  saveButton.on("click", saveButtonFunction);
+
+  // function feedbackMessage(message) {
+  //   var message = "Schedule saved successfully!";
+  //   feedbackMessage(message);
+  //   self = $(".message");
+  //   self.append(message);
+  //   setTimeout("self.fadeOut()", 1000);
+  //   if (setTimeout === 0) {
+  //     self.empty();
+  //     self.style.display = "block;";
+  //   }
+  // }
+});
+
 // 1. Render the calender blocks (timeblocks)
 
 // - Read from localStorage
