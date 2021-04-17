@@ -8,15 +8,17 @@ var container = $(".container");
 var messageDiv = $(".message");
 var storedCalendar = [];
 
+// document renders when ready
 $(document).ready(function () {
-  function generate() {
+  function generateStored() {
     if (!localStorage.getItem("calendar")) {
       localStorage.setItem("calendar", JSON.stringify(storedCalendar));
     } else {
       storedCalendar = JSON.parse(localStorage.getItem("calendar"));
     }
+    console.log(storedCalendar);
   }
-  generate();
+  generateStored();
   var hours = [
     "09:00 a.m.",
     "10:00 a.m.",
@@ -60,6 +62,8 @@ $(document).ready(function () {
     divEl.append(buttonEl);
     buttonEl.append(imgEl);
   }
+
+  // color code the divs function
   function generateColor() {
     $("span").each(function (index) {
       if ($(this).text().slice(0, 2) < currentHour) {
@@ -72,6 +76,8 @@ $(document).ready(function () {
     });
   }
   generateColor();
+
+  // save button function
   function saveButtonFunction() {
     var hourLabel = $(this).siblings(".description").attr("hour-label");
     var textAreaInput = $(this).siblings(".description").val();
@@ -83,13 +89,14 @@ $(document).ready(function () {
     if (newInput.Task === "") {
       return;
     }
-    var storedCalendar = JSON.parse(localStorage.getItem("calendar"));
+    storedCalendar = JSON.parse(localStorage.getItem("calendar"));
     if (storedCalendar === null) {
       storedCalendar = [];
     }
     storedCalendar.push(newInput);
     localStorage.setItem("calendar", JSON.stringify(storedCalendar));
     console.log(localStorage.getItem("calendar"));
+    // message
     var message = "Schedule saved successfully!";
     feedbackMessage(message);
   }
@@ -97,6 +104,7 @@ $(document).ready(function () {
   saveButton.on("click", saveButtonFunction);
 });
 
+// saved button feedback message function
 function feedbackMessage(message) {
   self = $(".message");
   self.append(message);
