@@ -45,9 +45,9 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 Below are links to access this live website and repository.
 
-Github:
+Github: https://github.com/bergannation/05_workDayScheduler
 
-Deployed URL:
+Deployed URL: https://bergannation.github.io/05_workDayScheduler/
 
 ## Mock-Up
 

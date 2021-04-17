@@ -22,11 +22,11 @@ $(document).ready(function () {
     "10:00 a.m.",
     "11:00 a.m.",
     "12:00 p.m.",
-    "01:00 p.m.",
-    "02:00 p.m.",
-    "03:00 p.m.",
-    "04:00 p.m.",
-    "05:00 p.m.",
+    "13:00 p.m.",
+    "14:00 p.m.",
+    "15:00 p.m.",
+    "16:00 p.m.",
+    "17:00 p.m.",
   ];
   for (var i = 0; i < hours.length; i++) {
     var sectionEl = $("<section>");
@@ -45,7 +45,7 @@ $(document).ready(function () {
     divEl.addClass("row time-block col-12 col-lg-9 m-0 p-0 shadow");
     spanEl.addClass("hour col-1");
     textareaEl.addClass("description col-10");
-    buttonEl.addClass("saveBtn btnEl btn-lg col-1");
+    buttonEl.addClass("saveBtn btnEl btn-lg active col-1");
     imgEl.addClass("fa fa-save");
 
     divEl.attr("hour-label", hours[i]);
