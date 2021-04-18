@@ -16,8 +16,6 @@ $(document).ready(function () {
     } else {
       storedCalendar = JSON.parse(localStorage.getItem("calendar"));
     }
-    console.log(storedCalendar);
-    console.log(storedCalendar[1].Hour);
 
     // storedCalendar.forEach(function (storedCalendar) {
     //   var newItem = $("textarea");
