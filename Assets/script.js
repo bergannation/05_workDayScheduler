@@ -17,18 +17,26 @@ $(document).ready(function () {
       storedCalendar = JSON.parse(localStorage.getItem("calendar"));
     }
     console.log(storedCalendar);
+    console.log(storedCalendar[1].Hour);
+
+    // storedCalendar.forEach(function (storedCalendar) {
+    //   var newItem = $("textarea");
+
+    //   newItem.textContent = storedCalendar.Task;
+    //   console.log(storedCalendar.Task);
+    // });
   }
   generateStored();
   var hours = [
-    "09:00 a.m.",
-    "10:00 a.m.",
-    "11:00 a.m.",
-    "12:00 p.m.",
-    "13:00 p.m.",
-    "14:00 p.m.",
-    "15:00 p.m.",
-    "16:00 p.m.",
-    "17:00 p.m.",
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
   ];
   for (var i = 0; i < hours.length; i++) {
     var sectionEl = $("<section>");
@@ -52,7 +60,7 @@ $(document).ready(function () {
 
     divEl.attr("hour-label", hours[i]);
     spanEl.attr("hour-label", hours[i]);
-    textareaEl.attr("hour-label", hours[i]);
+    textareaEl.attr("label", hours[i]);
     buttonEl.attr("hour-label", hours[i]);
     spanEl.text(hours[i]);
 
