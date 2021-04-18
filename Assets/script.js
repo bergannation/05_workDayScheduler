@@ -58,7 +58,7 @@ $(document).ready(function () {
 
     divEl.attr("hour-label", hours[i]);
     spanEl.attr("hour-label", hours[i]);
-    textareaEl.attr("label", hours[i]);
+    textareaEl.attr("hour-label", hours[i]);
     buttonEl.attr("hour-label", hours[i]);
     spanEl.text(hours[i]);
 
