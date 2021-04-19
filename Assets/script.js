@@ -7,7 +7,17 @@ console.log(currentHour);
 var container = $(".container");
 var messageDiv = $(".message");
 var storedCalendar = [];
-
+var hours = [
+  "09:00",
+  "10:00",
+  "11:00",
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+];
 // document renders when ready
 $(document).ready(function () {
   function generateStored() {
@@ -17,25 +27,18 @@ $(document).ready(function () {
       storedCalendar = JSON.parse(localStorage.getItem("calendar"));
     }
 
-    // storedCalendar.forEach(function (storedCalendar) {
-    //   var newItem = $("textarea");
+    for (var i = 0; i < hours.length; i++) {
+      const hour = hours[i];
 
-    //   newItem.textContent = storedCalendar.Task;
-    //   console.log(storedCalendar.Task);
-    // });
+      storedCalendar.forEach((ele) => {
+        if (ele.Hour === hour) {
+          const element = document.getElementById(`${hour}`);
+          element.innerText = ele.Task;
+        }
+      });
+    }
   }
-  generateStored();
-  var hours = [
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-  ];
+
   for (var i = 0; i < hours.length; i++) {
     var sectionEl = $("<section>");
     var divEl = $("<div>");
@@ -53,12 +56,12 @@ $(document).ready(function () {
     divEl.addClass("row time-block col-12 col-lg-9 m-0 p-0 shadow");
     spanEl.addClass("hour col-1");
     textareaEl.addClass("description col-10");
-    buttonEl.addClass("saveBtn btnEl btn-lg active col-1");
+    buttonEl.addClass("saveBtn i:hover btnEl btn-lg active col-1");
     imgEl.addClass("fa fa-save");
 
-    divEl.attr("hour-label", hours[i]);
+    divEl.attr("id", "text");
     spanEl.attr("hour-label", hours[i]);
-    textareaEl.attr("hour-label", hours[i]);
+    textareaEl.attr("id", hours[i]);
     buttonEl.attr("hour-label", hours[i]);
     spanEl.text(hours[i]);
 
@@ -85,7 +88,7 @@ $(document).ready(function () {
 
   // save button function
   function saveButtonFunction() {
-    var hourLabel = $(this).siblings(".description").attr("hour-label");
+    var hourLabel = $(this).siblings(".description").attr("id");
     var textAreaInput = $(this).siblings(".description").val();
 
     var newInput = {
@@ -108,6 +111,8 @@ $(document).ready(function () {
   }
   var saveButton = $(".saveBtn");
   saveButton.on("click", saveButtonFunction);
+
+  generateStored();
 });
 
 // saved button feedback message function
