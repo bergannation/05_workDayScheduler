@@ -56,7 +56,7 @@ $(document).ready(function () {
     divEl.addClass("row time-block col-12 col-lg-9 m-0 p-0 shadow");
     spanEl.addClass("hour col-1");
     textareaEl.addClass("description col-10");
-    buttonEl.addClass("saveBtn i:hover btnEl btn-lg active col-1");
+    buttonEl.addClass("btn saveBtn btnEl btn-lg active col-1");
     imgEl.addClass("fa fa-save");
 
     divEl.attr("id", "text");
