@@ -105,45 +105,9 @@ $(document).ready(function () {
     storedCalendar.push(newInput);
     localStorage.setItem("calendar", JSON.stringify(storedCalendar));
     console.log(localStorage.getItem("calendar"));
-    // message
-    var message = "Schedule saved successfully!";
-    feedbackMessage(message);
   }
   var saveButton = $(".saveBtn");
   saveButton.on("click", saveButtonFunction);
 
   generateStored();
 });
-
-// saved button feedback message function
-function feedbackMessage(message) {
-  self = $(".message");
-  self.append(message);
-  setTimeout("self.fadeOut()", 1000);
-  if (setTimeout === 0) {
-    self.empty();
-    self.style.display = "block;";
-  }
-}
-// 1. Render the calender blocks (timeblocks)
-
-// - Read from localStorage
-
-// - determine if timeblock is past/present/future
-// - Add "value" from localStorage into input
-// - Append to DOM
-// - Add to local variable
-
-//add event listener for save button//
-
-// 1. Event Handler for "SAVE"
-
-// - When a user enters text into a field
-// - then user clicks "matching" "SAVE" button
-//   - save the related input field into local storage
-// - display notification/toast when the save is complete
-
-// would you suggest making it an object instead of an array to have key value pairs?
-//currently my function to check timeblocks against current time isn't working
-//when i hit save, my message appears and disappears, but then i can't repeat it
-// line 78 on the display:none-get rid of style after it executes-message clear function
